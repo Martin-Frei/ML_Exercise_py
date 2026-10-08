@@ -9,8 +9,24 @@ and then build a Streamlit app on top of them.
 - Source folder (READ-ONLY): C:\Users\tsinn\VSCode\Repos\ML_Ecercise\
 - Target folder (WRITE HERE): C:\Users\tsinn\VSCode\Repos\ML_Exercise_py\
 
-Both folders are on my local disk. Both Git repos exist. Do NOT push
-to Git yourself. I handle Git commits after each batch.
+This task runs locally with Claude Code. You have file access to both
+folders. All 19 notebooks are present in ML_Ecercise, including two
+that are not on GitHub (xgb_classification_3A_target_encoding_mean
+and xgb_classification_3B_target_encoding_per_class).
+
+## 🚫 CRITICAL RULES – read first
+
+1. **NEVER run git commands.** No `git add`, `git commit`, `git push`,
+   `git checkout`, `git branch`, `git reset`, or anything else. I
+   handle all Git operations myself.
+2. **NEVER push to any repository.** Not to `ML_Exercise_py`, not to
+   `houseofstocks`, not to anything. Ignore any repo configuration
+   in this session.
+3. **NEVER modify the source folder** `ML_Ecercise`. It is READ-ONLY.
+4. **NEVER write .ipynb files.** Only `.py` files, plus REPORT.md and
+   the AGENT_TASK.md you are reading.
+5. **NEVER touch `.venv/`, `requirements.txt`, `.gitignore`, `data/`,
+   or `shared/`.** They are references.
 
 ## Language
 
@@ -27,7 +43,6 @@ The folder C:\Users\tsinn\VSCode\Repos\ML_Ecercise\ contains:
 
 You may READ any file in this folder to understand the logic.
 You may NEVER write, edit, delete, rename, or move anything here.
-You may NEVER run git commands in this folder.
 
 ## Target folder rules (WRITE HERE)
 
@@ -55,7 +70,8 @@ their style exactly:
 - Comment density
 - Naming conventions
 - Import order
-- Function docstring format
+- Function docstring format (summary line + Parameters + Returns,
+  NumPy style, no "Purpose:" heading)
 - `if __name__ == "__main__":` pattern
 
 ## Target folder structure (final state)
@@ -83,32 +99,54 @@ ML_Exercise_py/
         ├── 1_RF_GridSearch.py          exists (reference)
         └── <numbered pages for all remaining notebooks>
 
-## Notebook inventory and category
+## Notebook inventory, category, and target folder
 
 The 19 notebooks have been analyzed for runtime. Their category
-decides how the ported model is handled:
+decides how the ported model is handled. The target folder decides
+where the .py file goes.
 
-| # | Notebook | Category | Action |
-|---|---|---|---|
-| 1 | decision_tree_classification_meat_type | medium | on-the-fly |
-| 2 | decision_tree_regression_price_per_kilo | medium | on-the-fly |
-| 3 | random_forest_classification | medium | on-the-fly |
-| 4 | random_forest_combined_dataset | fast | on-the-fly |
-| 5 | random_forest_log_price | medium | on-the-fly |
-| 6 | random_forest_regression | medium | on-the-fly |
-| 7 | random_forest_regression_grid_search | SLOW | ALREADY PORTED (reference) |
-| 8 | random_forest_regression_outlier_imputation | medium | on-the-fly |
-| 9 | random_forest_target_encoding | medium | on-the-fly |
-| 10 | xgb_classification | medium | on-the-fly |
-| 11 | xgb_classification_3A_target_encoding_mean | medium | on-the-fly |
-| 12 | xgb_classification_3B_target_encoding_per_class | medium | on-the-fly |
-| 13 | xgb_classification_imputation_clip | medium | on-the-fly |
-| 14 | xgb_hyperparameter_tuning | FAILED | fix bug, then treat as slow |
-| 15 | xgb_regression | medium | on-the-fly |
-| 16 | xgb_regression_clip_fill | fast | on-the-fly |
-| 17 | xgb_regression_combined | fast | on-the-fly |
-| 18 | xgb_regression_log_one_hot_encoding | fast | on-the-fly |
-| 19 | xgb_regression_one_hot_encoding | fast | on-the-fly |
+| # | Notebook | Target folder | Category | Action |
+|---|---|---|---|---|
+| 1 | decision_tree_classification_meat_type | classification/ | medium | on-the-fly |
+| 2 | decision_tree_regression_price_per_kilo | regression/ | medium | on-the-fly |
+| 3 | random_forest_classification | classification/ | medium | on-the-fly |
+| 4 | random_forest_combined_dataset | regression/ | fast | on-the-fly |
+| 5 | random_forest_log_price | regression/ | medium | on-the-fly |
+| 6 | random_forest_regression | regression/ | medium | on-the-fly |
+| 7 | random_forest_regression_grid_search | regression/ | SLOW | ALREADY PORTED (reference) |
+| 8 | random_forest_regression_outlier_imputation | regression/ | medium | on-the-fly |
+| 9 | random_forest_target_encoding | classification/ | medium | on-the-fly |
+| 10 | xgb_classification | classification/ | medium | on-the-fly |
+| 11 | xgb_classification_3A_target_encoding_mean | classification/ | medium | on-the-fly |
+| 12 | xgb_classification_3B_target_encoding_per_class | classification/ | medium | on-the-fly |
+| 13 | xgb_classification_imputation_clip | classification/ | medium | on-the-fly |
+| 14 | xgb_hyperparameter_tuning | regression/ | FAILED | fix bug, then treat as slow |
+| 15 | xgb_regression | regression/ | medium | on-the-fly |
+| 16 | xgb_regression_clip_fill | regression/ | fast | on-the-fly |
+| 17 | xgb_regression_combined | regression/ | fast | on-the-fly |
+| 18 | xgb_regression_log_one_hot_encoding | regression/ | fast | on-the-fly |
+| 19 | xgb_regression_one_hot_encoding | regression/ | fast | on-the-fly |
+
+### Folder mapping summary
+
+- **classification/** (7 notebooks): #1, #3, #9, #10, #11, #12, #13
+- **regression/** (12 notebooks): #2, #4, #5, #6, #8, #14, #15, #16,
+  #17, #18, #19
+- **already done**: #7 = `regression/random_forest_grid_search.py`
+
+**Confirm this mapping by telling me the target column of the three
+ambiguous notebooks before you start writing:**
+- #4 (random_forest_combined_dataset): `price_eur_per_kg` or `meat_type`?
+- #9 (random_forest_target_encoding): same question
+- #14 (xgb_hyperparameter_tuning): same question
+
+If any of these is misclassified, tell me before writing.
+
+### Naming exception
+
+Notebook #7 (`random_forest_regression_grid_search.ipynb`) was ported
+to `regression/random_forest_grid_search.py`. Keep this filename. Do
+NOT rename it or redo it.
 
 ### Category rules
 
@@ -145,12 +183,31 @@ version. Document each fix in REPORT.md.
 - **Bug**: Absolute paths like `/home/tsinn/hermes-spielwiese/...`
   inside `plt.savefig()` calls.
 - **Fix**: Remove all `plt.savefig()` calls with absolute paths.
-  Keep `plt.show()` only.
+  Use the `--save-plots DIR` flag instead (see rule 7b).
 - **Bug**: German comments throughout the notebook.
 - **Fix**: Translate all comments to English.
 - **Bug**: `print(f'Python: {np.__version__}')` mislabels numpy as
   "Python".
 - **Fix**: Change to `print(f'numpy: {np.__version__}')`.
+
+### Bug 2 (potential): Label leakage in engineered features
+
+Some notebooks engineer features like `price_per_protein` and
+`price_x_marbling` from the target column `price_eur_per_kg`. When
+these features are used to predict `price_eur_per_kg`, the model
+sees the answer during training (label leakage).
+
+**Rule for the port:**
+- Fix it in the .py file. Compute the derived features WITHOUT using
+  the target when they serve as model input.
+- Keep the original notebook logic as a code comment for comparison,
+  clearly marked with `# NOTE (label leakage): original code was ...`.
+- In REPORT.md, report BOTH metric sets:
+  "With leakage: R²=0.99 / Without leakage: R²=0.87"
+- The Streamlit page uses the FIXED version.
+
+If you are unsure whether a specific feature causes leakage, ask me
+before deciding.
 
 ### Additional bugs
 
@@ -167,36 +224,36 @@ Work in 5 batches. After each batch, STOP and report to me.
 Wait for my explicit approval ("approved" or "continue") before
 starting the next batch.
 
+**Phase 1 creates ONLY .py files in classification/ and regression/
+plus REPORT.md. Streamlit pages are Phase 2 and come later.**
+
 ### Batch 1 (4 notebooks)
-- decision_tree_classification_meat_type
-- decision_tree_regression_price_per_kilo
-- random_forest_classification
-- random_forest_regression
+- #1 decision_tree_classification_meat_type (classification/)
+- #2 decision_tree_regression_price_per_kilo (regression/)
+- #3 random_forest_classification (classification/)
+- #6 random_forest_regression (regression/)
 
 ### Batch 2 (4 notebooks)
-- random_forest_combined_dataset
-- random_forest_log_price
-- random_forest_regression_outlier_imputation
-- random_forest_target_encoding
+- #4 random_forest_combined_dataset (regression/)
+- #5 random_forest_log_price (regression/)
+- #8 random_forest_regression_outlier_imputation (regression/)
+- #9 random_forest_target_encoding (classification/)
 
 ### Batch 3 (4 notebooks)
-- xgb_classification
-- xgb_classification_3A_target_encoding_mean
-- xgb_classification_3B_target_encoding_per_class
-- xgb_classification_imputation_clip
+- #10 xgb_classification (classification/)
+- #11 xgb_classification_3A_target_encoding_mean (classification/)
+- #12 xgb_classification_3B_target_encoding_per_class (classification/)
+- #13 xgb_classification_imputation_clip (classification/)
 
 ### Batch 4 (5 notebooks)
-- xgb_regression
-- xgb_regression_clip_fill
-- xgb_regression_combined
-- xgb_regression_log_one_hot_encoding
-- xgb_regression_one_hot_encoding
+- #15 xgb_regression (regression/)
+- #16 xgb_regression_clip_fill (regression/)
+- #17 xgb_regression_combined (regression/)
+- #18 xgb_regression_log_one_hot_encoding (regression/)
+- #19 xgb_regression_one_hot_encoding (regression/)
 
 ### Batch 5 (1 notebook, after bug fix)
-- xgb_hyperparameter_tuning
-
-Note: `random_forest_regression_grid_search.py` is already done as
-a reference. Do NOT redo it.
+- #14 xgb_hyperparameter_tuning (regression/)
 
 ## Conversion rules (Phase 1, per notebook)
 
@@ -224,27 +281,43 @@ a reference. Do NOT redo it.
 6. **`%matplotlib inline`**: skip.
 
 7. **Plot cells**: keep `plt.show()`. Add `plt.tight_layout()` before.
-   NEVER use `plt.savefig()` with absolute paths.
+
+7b. **Plot CLI flags** (needed because `plt.show()` blocks when
+    running from a terminal):
+    - Default: show plots via `plt.show()`.
+    - `--no-plots`: suppress plots (use `matplotlib.use('Agg')`
+      and skip all `plt.show()` calls).
+    - `--save-plots DIR`: save plots as PNG into DIR, do NOT call
+      `plt.show()`.
+    - Add these three flags to the argparse setup of any script
+      that creates plots.
+    - NEVER use hardcoded `plt.savefig()` paths.
 
 8. **`display(df)` or bare `df.head()`**: replace with
    `print(df.head().to_string())` so output appears when run.
 
-9. **Every function** gets a docstring with Purpose, Parameters,
-   Returns.
+9. **Every function** gets a docstring matching the reference style:
+   - One-line summary
+   - Parameters section (NumPy style)
+   - Returns section
+   - No "Purpose:" heading
 
 10. **Non-trivial variables** get a short inline comment.
 
 11. **`if __name__ == "__main__":`** block in every file. It runs
     the full pipeline and prints key results (metrics, tables) like
     the notebook did. For slow models, use argparse with a
-    `--save-model` flag.
+    `--save-model` flag. For scripts with plots, include the plot
+    flags from rule 7b.
 
 12. **`random_state=42`** everywhere a random seed is needed.
 
 13. **Relative paths only**. Never absolute paths.
 
 14. **Every .py file must be runnable** standalone via:
-    `python -m classification.<name>` or `python -m regression.<name>`
+    `.venv\Scripts\python -m classification.<name>`
+    or
+    `.venv\Scripts\python -m regression.<name>`
     (module syntax, not file path).
 
 15. **File naming**: same as the notebook name, but snake_case and
@@ -276,7 +349,7 @@ Sections (top to bottom):
 5. **Model performance** (3 columns): MAE, RMSE, R²
 6. **Actual vs Predicted**: `st.scatter_chart`
 7. **Feature importance**: `st.bar_chart`
-8. **Predict a custom price**: 8 sliders + predict button
+8. **Predict a custom price**: sliders + predict button
 
 Copy the exact structure from `app/pages/1_RF_GridSearch.py`.
 
@@ -311,8 +384,7 @@ Sections:
 
 ### Rules for ALL Streamlit pages
 
-1. **sys.path fix at the top** (needed because Streamlit adds the
-   page folder to sys.path, not the project root):
+1. **sys.path fix at the top** of every page:
 
 ```python
 import sys
@@ -320,26 +392,3 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
-
-    ## Additional rules
-
-### Git
-- Do NOT run any git commands in either folder: no commit, no push,
-  no branch, no checkout. I handle all Git operations myself.
-
-### Running files
-- You MAY run the ported .py files to verify they work, using the
-  project venv:
-  `.venv\Scripts\python -m classification.<name>`
-  `.venv\Scripts\python -m regression.<name>`
-- Compare the printed metrics with the original notebook outputs
-  and report any differences in REPORT.md.
-
-### Folder mapping
-- classification/: #1, #3, #9, #10, #11, #12, #13
-- regression/: #2, #4, #5, #6, #8, #14, #15, #16, #17, #18, #19
-
-### Naming exception
-- Notebook #7 (random_forest_regression_grid_search) was ported as
-  regression/random_forest_grid_search.py. Keep this name.
-  Do not rename or redo it.

@@ -27,3 +27,12 @@ __pycache__/
 
 # Model artifacts (uncomment the next line ONLY if you store models elsewhere)
 # models/*.joblib
+
+.claude
+
+# Generated output
+regression/saved_models/
+plots/
+
+# Local agent instructions
+AGENT_TASK.md

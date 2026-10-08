@@ -1,0 +1,43 @@
+# ============================================================
+# ML Exercises – Python 3.11 environment
+# ============================================================
+# This file lists all packages required to RUN the notebooks
+# and the Streamlit app. Development-only tools (jupyter,
+# nbconvert, pytest, etc.) are NOT listed here.
+#
+# Tested with:
+#   - Python 3.11
+#   - Windows 11
+#   - Streamlit Cloud (Linux)
+#
+# To install locally:
+#     python -m pip install -r requirements.txt
+# ============================================================
+
+
+# --- Core data science ---
+pandas==3.0.6
+numpy==2.4.6
+scikit-learn==1.9.1
+
+# --- Boosting ---
+xgboost==3.2.0
+
+# --- Visualization ---
+matplotlib==3.11.2
+seaborn==0.13.2
+
+# --- Model persistence ---
+joblib==1.6.0
+
+# --- Streamlit app ---
+streamlit==1.65.0
+
+# ============================================================
+# Notes:
+# - altair and pyarrow are installed automatically by Streamlit.
+#   Only add them here if you need a specific version pinned.
+# - jupyter / nbconvert are NOT required for the Streamlit app.
+#   Install them locally with:
+#     python -m pip install jupyter nbconvert nbformat ipykernel
+# ============================================================

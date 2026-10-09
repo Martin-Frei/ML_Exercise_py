@@ -157,3 +157,60 @@ with tab_metrics:
         | **Accuracy** | Classification | How often the model picks the right meat type (5 classes, so guessing gives about 20%) |
         """
     )
+    
+with tab_csv:
+    st.markdown(
+        """
+        The project uses **two CSV files** with the same nine columns.
+        Both are **synthetic**: they were generated for this project and do not come
+        from real purchasing or sales data. The value ranges are realistic, but no
+        row describes a real cut of meat.
+
+        | File | Rows | Purpose |
+        |---|---|---|
+        | `meat_price_dataset.csv` | 1,200 | Clean data for training and testing the models |
+        | `meat_price_100_stress_test.csv` | 100 | Hard cases that challenge the models — and usually overwhelm them |
+
+        **The columns:**
+
+        | Column | Meaning |
+        |---|---|
+        | `meat_type` | Meat category, 1 = cheapest to 5 = most expensive |
+        | `fat_content_pct` | Fat content in percent |
+        | `protein_pct` | Protein content in percent |
+        | `marbling_score` | Marbling grade |
+        | `animal_age_months` | Age of the animal in months |
+        | `storage_days` | Days in storage |
+        | `organic` | Organic label (0 = no, 1 = yes) |
+        | `cut_quality` | Quality grade of the cut, 1 to 5 |
+        | `price_eur_per_kg` | Price in euros per kilo — the value the regression models predict |
+
+        **What makes the stress test hard:**
+
+        - **Missing values** in every column (7–14 per column)
+        - **Outliers** far outside the clean range, e.g. an animal age of 189 months
+          instead of at most 71
+        - **Shifted prices:** on average about 7 € per kilo higher than in the clean data.
+          This is the main reason every model trained only on clean data fails here.
+        """
+    )
+
+    with st.expander("Value ranges: clean data vs. stress test"):
+        st.markdown(
+            """
+            | Column | Clean data | Stress test | Missing (stress) | Outside clean range |
+            |---|---|---|---|---|
+            | `meat_type` | 1–5 | 1–5 | 9 | 0 |
+            | `fat_content_pct` | 2–35 | 2–**58.5** | 14 | 3 |
+            | `protein_pct` | 15–26 | 15.1–25 | 10 | 0 |
+            | `marbling_score` | 1–10 | **0**–**12** | 11 | 2 |
+            | `animal_age_months` | 2–71 | 2–**189** | 8 | 2 |
+            | `storage_days` | 0–20 | 0–**80** | 9 | 2 |
+            | `organic` | 0/1 | 0/1 | 9 | 0 |
+            | `cut_quality` | 1–5 | 1–5 | 7 | 0 |
+            | `price_eur_per_kg` | 2.50–43.33 | 12.14–**65.40** | 9 | 6 |
+
+            **Mean price:** 23.05 € (clean) vs. 29.97 € (stress).
+            Bold values lie outside the range the models saw during training.
+            """
+        )

@@ -3,3 +3,7 @@ headless = true
 
 [theme]
 base = "light"
+
+[theme.sidebar]
+primaryColor = "#FF4B4B"
+textColor = "#31333F"

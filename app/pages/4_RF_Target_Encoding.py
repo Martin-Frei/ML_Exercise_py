@@ -120,7 +120,7 @@ c4.metric("Test accuracy", f"{acc:.2%}")
 
 # Data explorer
 st.header("Data explorer")
-st.dataframe(df_f.head(n_rows), use_container_width=True, hide_index=True)
+st.dataframe(df_f.head(n_rows), width="stretch", hide_index=True)
 
 # Model performance
 st.header("Model performance")
@@ -138,7 +138,7 @@ report_dict = classification_report(
     y_test, y_pred_all, labels=CLASS_LABELS, output_dict=True, zero_division=0
 )
 report_df = pd.DataFrame(report_dict).T.loc[[str(c) for c in CLASS_LABELS]].round(3)
-st.dataframe(report_df, use_container_width=True)
+st.dataframe(report_df, width="stretch")
 
 st.subheader("Confusion matrix")
 cm = confusion_matrix(y_test, y_pred_all, labels=CLASS_LABELS)
@@ -160,9 +160,9 @@ st.bar_chart(importances)
 with st.expander("Target encoding maps"):
     for col in ENCODE_COLS:
         st.write(f"**{col}**")
-        st.dataframe(enc[col].rename("mean_meat_type").reset_index(), use_container_width=True)
+        st.dataframe(enc[col].rename("mean_meat_type").reset_index(), width="stretch")
     st.write("**price_bin** (5 quantile bins)")
-    st.dataframe(enc["price_bin"].rename("mean_meat_type").reset_index(), use_container_width=True)
+    st.dataframe(enc["price_bin"].rename("mean_meat_type").reset_index(), width="stretch")
 
 # Predict meat type
 st.header("Predict meat type")

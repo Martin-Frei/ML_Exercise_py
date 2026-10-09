@@ -202,7 +202,7 @@ st.markdown(f"Showing the first **{n_rows}** rows after filtering:")
 
 st.dataframe(
     df_filtered.head(n_rows),
-    use_container_width=True,
+    width="stretch",
     hide_index=True,
 )
 

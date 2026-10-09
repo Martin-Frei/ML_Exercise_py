@@ -92,7 +92,7 @@ c4.metric("Max price", f"{df_f[TARGET].max():.2f} EUR" if len(df_f) else "—")
 
 # Data explorer
 st.header("Data explorer")
-st.dataframe(df_f.head(n_rows), use_container_width=True, hide_index=True)
+st.dataframe(df_f.head(n_rows), width="stretch", hide_index=True)
 
 # Model performance
 st.header("Model performance")
@@ -109,7 +109,7 @@ st.scatter_chart(scatter_df, x="Actual", y="Predicted")
 
 # Clip bounds info
 with st.expander("Training clip bounds (applied to OOD data)"):
-    st.dataframe(clip_max.rename("training_max").reset_index(), use_container_width=True)
+    st.dataframe(clip_max.rename("training_max").reset_index(), width="stretch")
 
 # Feature importance
 st.header("Feature importance")

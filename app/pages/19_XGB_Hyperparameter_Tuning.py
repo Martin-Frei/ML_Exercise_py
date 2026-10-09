@@ -119,7 +119,7 @@ c4.metric("Stress R²", f"{r2_st:.4f}")
 
 # Data explorer
 st.header("Data explorer")
-st.dataframe(df_f.head(n_rows), use_container_width=True, hide_index=True)
+st.dataframe(df_f.head(n_rows), width="stretch", hide_index=True)
 
 # Model performance
 st.header("Model performance")
@@ -151,7 +151,7 @@ param_cols = ["n_estimators", "learning_rate", "max_depth", "subsample",
 param_df = pd.DataFrame([
     {"Parameter": p, "Value": params.get(p, "—")} for p in param_cols if p in params
 ])
-st.dataframe(param_df, use_container_width=True, hide_index=True)
+st.dataframe(param_df, width="stretch", hide_index=True)
 
 # Feature importance
 st.header("Feature importance")

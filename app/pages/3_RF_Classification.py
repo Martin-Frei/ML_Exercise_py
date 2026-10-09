@@ -84,7 +84,7 @@ c4.metric("Test accuracy", f"{acc:.2%}")
 
 # Data explorer
 st.header("Data explorer")
-st.dataframe(df_f.head(n_rows), use_container_width=True, hide_index=True)
+st.dataframe(df_f.head(n_rows), width="stretch", hide_index=True)
 
 # Model performance
 st.header("Model performance")
@@ -104,7 +104,7 @@ report_dict = classification_report(
 report_df = (
     pd.DataFrame(report_dict).T.loc[[str(c) for c in CLASS_LABELS]].round(3)
 )
-st.dataframe(report_df, use_container_width=True)
+st.dataframe(report_df, width="stretch")
 
 st.subheader("Confusion matrix")
 cm = confusion_matrix(y_test, y_pred_all, labels=CLASS_LABELS)

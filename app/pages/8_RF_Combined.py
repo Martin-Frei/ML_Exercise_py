@@ -103,7 +103,7 @@ c4.metric("Stress rows", int((df_train["source"] == "stress").sum()))
 
 # Data explorer
 st.header("Data explorer")
-st.dataframe(df_f.head(n_rows), use_container_width=True, hide_index=True)
+st.dataframe(df_f.head(n_rows), width="stretch", hide_index=True)
 
 # Model performance
 st.header("Model performance")
@@ -129,7 +129,7 @@ for label, mask in [("Main (clean)", main_mask), ("Stress", stress_mask)]:
             "MAE": round(mean_absolute_error(yt, yp), 4),
             "R²": round(r2_score(yt, yp), 4),
         })
-st.dataframe(pd.DataFrame(perf_data), use_container_width=True, hide_index=True)
+st.dataframe(pd.DataFrame(perf_data), width="stretch", hide_index=True)
 
 scatter_df = pd.DataFrame({"Actual": y_test.values, "Predicted": y_pred})
 st.scatter_chart(scatter_df, x="Actual", y="Predicted")

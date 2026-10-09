@@ -103,7 +103,7 @@ c4.metric("Test accuracy", f"{acc:.2%}")
 # ------------------------------------------------------------
 
 st.header("Data explorer")
-st.dataframe(df_f.head(n_rows), use_container_width=True, hide_index=True)
+st.dataframe(df_f.head(n_rows), width="stretch", hide_index=True)
 
 # ------------------------------------------------------------
 # Model performance
@@ -131,7 +131,7 @@ report_df = (
     .rename(columns={"support": "support"})
     .round(3)
 )
-st.dataframe(report_df, use_container_width=True)
+st.dataframe(report_df, width="stretch")
 
 # Confusion matrix
 st.subheader("Confusion matrix")
